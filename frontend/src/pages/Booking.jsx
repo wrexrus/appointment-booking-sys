@@ -40,34 +40,47 @@ const Booking = () => {
   };
 
   return (
-    <div style={{ padding: "20px" }}>
-      <h2>Book Appointment</h2>
+    <div className="min-h-screen bg-gray-100 flex flex-col items-center py-10">
+      <h2 className="text-3xl font-bold mb-6">Book Appointment</h2>
 
-      <input
-        type="date"
-        value={date}
-        onChange={e => setDate(e.target.value)}
-      />
+        <div className="bg-white shadow-md rounded-lg p-6 w-full max-w-md">
+        <label className="block text-gray-700 font-medium mb-2">
+          Select Date
+        </label>
+        <input
+          type="date"
+          value={date}
+          onChange={e => setDate(e.target.value)}
+          className="w-full border border-gray-300 rounded-lg p-2 mb-4 focus:outline-none focus:ring-2 focus:ring-blue-500"
+        />
 
-      <br /><br />
+        <label className="block text-gray-700 font-medium mb-2">
+          Select Time Slot
+        </label>
+        <select
+          value={timeSlot}
+          onChange={e => setTimeSlot(e.target.value)}
+          className="w-full border border-gray-300 rounded-lg p-2 mb-4 focus:outline-none focus:ring-2 focus:ring-blue-500"
+        >
+          <option value="">Select Slot</option>
+          {slots.map(slot => (
+            <option key={slot} value={slot}>
+              {slot}
+            </option>
+          ))}
+        </select>
 
-      <select
-        value={timeSlot}
-        onChange={e => setTimeSlot(e.target.value)}
-      >
-        <option value="">Select Slot</option>
-        {slots.map(slot => (
-          <option key={slot} value={slot}>
-            {slot}
-          </option>
-        ))}
-      </select>
+        <button
+          onClick={handleBooking}
+          className="w-full bg-blue-500 text-white font-medium py-2 rounded-lg hover:bg-blue-600"
+        >
+          Book
+        </button>
 
-      <br /><br />
-
-      <button onClick={handleBooking}>Book</button>
-
-      <p>{message}</p>
+        {message && (
+          <p className="mt-4 text-center text-red-500">{message}</p>
+        )}
+      </div>
     </div>
   );
 };
